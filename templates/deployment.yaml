@@ -1,24 +1,29 @@
-kind: Deployment
+
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
+  # labels of deployment resource
   labels:
     app: nginx
-    web: tier
+    tier: frontend
+    purpose: deployment
 spec:
-  replicas: {{ .Values.deployment.replicas }}
+  replicas: {{ .Values.deployment.replicas }} #assume this will change
   selector:
     matchLabels:
       app: nginx
-      web: tier
+      tier: frontend
+      purpose: deployment
   template:
     metadata:
       labels:
         app: nginx
-        web: tier
+        tier: frontend
+        purpose: deployment
     spec:
       containers:
       - name: nginx
-        image: nginx:{{ .values.deployment.imageVersion }}
+        image: nginx:{{ .Values.deployment.imageVersion }} # image version frequently changes
         ports:
         - containerPort: 80
