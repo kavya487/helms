@@ -3,3 +3,4 @@ deployment:
   imageVersion: latest
 service: 
   nodePort: 30007
+
